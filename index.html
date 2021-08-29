@@ -6,23 +6,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-    <title>Parse-trade</title>
-</head>
-<style>
-
-    body {
-        font-family: 'Lato', sans-serif;
-        margin-left: 50px;
-        font-weight: bold;
-        color: #f1f1f1;
-        background-color: #20283c;
-    }
-    button {
-        /* background-color: #17d0c1!important;
+    
+    <title>Parse Trade</title>
+    <style>
         
-        margin-top: 5px;
-        border-radius: 5px;
-        padding: 5px 5px 5px 5px; */
+        html, body { 
+            font-family: 'Lato', sans-serif;
+            margin-left: 50px;
+            font-weight: bold;
+            /* color: #f1f1f1;
+             */
+            background-color: #20283c;
+        }
+        table { 
+            border-collapse: collapse;
+            background-color: #f1f1f1;
+            color: #333;
+         }
+        table tr, td, th {
+          border: 1px solid #000;
+          padding: 10px;
+        }
+        button {
         color: #f1f1f1;
         margin-top: 15px;
         cursor: pointer;
@@ -35,48 +40,44 @@
         border-radius: 5px;
         width: 175px;
     }
-</style>
-<body>
-    <label>Parse-trade</label>
-    <br>
-<textarea id="parse" name="parse-trade" rows="10" cols="50"></textarea>
-<br>
-<button id="btn">Parse</button>
-<div id="output">
-    <h1 id="title"></h1>
-    <p id="name"></p>
-    <p id="description"></p>
-    <p id="cost"></p>
-    <p id="listprice"></p>
-    <p id="amount"></p>
-
-</div>
-<script>
-
-    const $ = (foo) => { return document.getElementById(foo)}
-
-    const area = $('parse');
-    const btn = $('btn');
-    const output = $('output');
-    const title = $('title');
-    const name = $('name');
-    const description = $('description');
-    const cost = $('cost');
-    const listprice = $('listprice');
-    const ammount = $('amount')
-    console.log(name)
-    btn.addEventListener('click', () => {
-        console.log(area.value)
-        for(const entry of JSON.parse(area.value)) {
-            title.innerHTML = entry.title
-            name.innerHTML = 'Boost-name: ' + entry.name
-            description.innerHTML =  'Description: ' + entry.description
-            cost.innerHTML = 'User paid: ' + entry.trade_price + ' G'
-            listprice.innerHTML = 'Boost cost each: ' + entry.price_list + ' G'
-            ammount.innerHTML = 'Amount of this boost bought: ' + entry.count
+        </style>
+</head>
+    <body>
+        <textarea id="parse" name="parse-trade" rows="10" cols="50"></textarea>
+        <br>
+        <button id="btn">Parse</button>
+        <div id="container">
+            <table id="content">
+                <tr>
+                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Cost</th>
+                    <th>Listprice</th>
+                    <th>Amount</th>
+                </tr>
+            </table>
+        </div>
+    <script>
+        const $ = (foo) => { return document.getElementById(foo)}
+        const area = $('parse');
+        const table_area = $('content');
+        function addData(obj) {
+            let newRow = document.createElement("tr");
+            for(const key of Object.keys(obj)) {
+                let val = obj[key];
+                let newCell = document.createElement("td");
+                newCell.innerHTML = val;
+                newRow.append(newCell);
+                document.getElementById("content").appendChild(newRow);
+            }
         }
-    });
-    
-</script>
-</body>
+        btn.addEventListener('click', () => {
+            for(const entry of JSON.parse(area.value)) {
+                addData(entry);
+            }
+            area.value = "imported List, Note this list is not saved and if you refresh this page your data will be lost."
+        });
+    </script>
+    </body>
 </html>
