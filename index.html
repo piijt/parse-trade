@@ -14,8 +14,6 @@
             font-family: 'Lato', sans-serif;
             margin-left: 50px;
             font-weight: bold;
-            /* color: #f1f1f1;
-             */
             background-color: #20283c;
         }
         table { 
@@ -24,22 +22,25 @@
             color: #333;
          }
         table tr, td, th {
-          border: 1px solid #000;
-          padding: 10px;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
         button {
-        color: #f1f1f1;
-        margin-top: 15px;
-        cursor: pointer;
-        background: #7289da;
-        font-style: normal;
-        font-weight: 700;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        padding-left: 6px;
-        border-radius: 5px;
-        width: 175px;
-    }
+            color: #f1f1f1;
+            margin-top: 15px;
+            cursor: pointer;
+            background: #7289da;
+            font-style: normal;
+            font-weight: 700;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            padding-left: 6px;
+            border-radius: 5px;
+            width: 175px;
+        }
         </style>
 </head>
     <body>
@@ -50,11 +51,12 @@
             <table id="content">
                 <tr>
                     <th>Title</th>
-                    <th>Name</th>
                     <th>Description</th>
+                    
                     <th>Cost</th>
                     <th>Listprice</th>
                     <th>Amount</th>
+                    <th>Name</th>
                 </tr>
             </table>
         </div>
