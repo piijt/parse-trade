@@ -48,10 +48,10 @@
         </style>
 </head>
     <body>
-        <h1>Parse Trade</h1>
-        <textarea id="parse" name="parse-trade" rows="10" cols="50"></textarea>
+        <h1>Your Boosts</h1>
+        <!-- <textarea id="parse" name="parse-trade" rows="10" cols="50"></textarea>
         <br>
-        <button id="btn">Parse</button>
+        <button id="btn">Parse</button> -->
         <div id="container">
             <table id="content">
                 <tr>
@@ -65,25 +65,28 @@
             </table>
         </div>
     <script>
-        const $ = (foo) => { return document.getElementById(foo)}
-        const area = $('parse');
-        const table_area = $('content');
-        function addData(obj) {
-            let newRow = document.createElement("tr");
-            for(const key of Object.keys(obj)) {
-                let val = obj[key];
-                let newCell = document.createElement("td");
-                newCell.innerHTML = val;
-                newRow.append(newCell);
-                document.getElementById("content").appendChild(newRow);
+        (() => {
+            const $ = (foo) => { return document.getElementById(foo)}
+            // const area = $('parse');
+            const table_area = $('content');
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const area = urlParams.get('q')
+            console.log(area)
+            function addData(obj) {
+                let newRow = document.createElement("tr");
+                for(const key of Object.keys(obj)) {
+                    let val = obj[key];
+                    let newCell = document.createElement("td");
+                    newCell.innerHTML = val;
+                    newRow.append(newCell);
+                    document.getElementById("content").appendChild(newRow);
+                }
             }
-        }
-        btn.addEventListener('click', () => {
-            for(const entry of JSON.parse(area.value)) {
+            for(const entry of JSON.parse(area)) {
                 addData(entry);
             }
-            area.value = "imported List, Note this list is not saved and if you refresh this page your data will be lost."
-        });
+        })();
     </script>
     </body>
 </html>
